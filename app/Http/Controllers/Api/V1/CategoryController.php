@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -30,7 +31,19 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->all());
+        $data = $request->all();
+        if ($request->has('photopath')) {
+            $fname = time();
+            $fexe = $request->file('photopath')->extension();
+            $fpath = "$fname.$fexe";
+
+            $request->file('photopath')->storeAs('public/category', $fpath);
+
+            $data['photopath'] = 'category/' . $fpath;
+        }
+
+
+        $category = Category::create($data);
 
         return response()->json([
             'message' => 'Category Added Successfully',
@@ -59,6 +72,23 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::find($id);
+
+        if ($request->has('photopath')) {
+            $fname = time();
+            $fexe = $request->file('photopath')->extension();
+            $fpath = "$fname.$fexe";
+
+            $request->file('photopath')->storeAs('public/category', $fpath);
+
+            if($category->photopath)
+            {
+                Storage::delete('public/'.$category->photopath);
+            }
+
+            $data['photopath'] = 'category/' . $fpath;
+        }
+
+
         $category->update($request->all());
 
         return response()->json([
