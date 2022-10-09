@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('V1')->middleware('auth:sanctum')->group(function(){
-    Route::apiResource('category',CategoryController::class);
-});
 
 Route::prefix('v1')->group(function () {
     Route::post('login', [LoginRegisterController::class, 'login']);
@@ -28,4 +25,5 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LoginRegisterController::class, 'logout']);
+    Route::apiResource('category',CategoryController::class);
 });
