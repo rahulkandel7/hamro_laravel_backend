@@ -1,4 +1,0 @@
-@php 
-@endphp
-
-Hello world
