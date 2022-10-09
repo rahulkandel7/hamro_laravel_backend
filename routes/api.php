@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\Api\V1\CategoryController;
-use App\Http\Controllers\API\V1\LoginRegisterController;
+use App\Http\Controllers\Api\V1\LoginRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
