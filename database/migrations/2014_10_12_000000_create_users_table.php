@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('profile_photo');
             $table->string('gender');
+            $table->string('role');
             $table->boolean('isActive')->default(true);
             $table->rememberToken();
             $table->timestamps();
