@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\API\V1\LoginRegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('V1')->middleware('auth:sanctum')->group(function(){
     Route::apiResource('category',CategoryController::class);
+});
+
+Route::prefix('v1')->group(function () {
+    Route::post('login', [LoginRegisterController::class, 'login']);
+    Route::post('register', [LoginRegisterController::class, 'register']);
+});
+
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [LoginRegisterController::class, 'logout']);
 });
