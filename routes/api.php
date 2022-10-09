@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('V1')->middleware('auth:sanctum')->group(function(){
+Route::prefix('v1')->middleware('auth:sanctum')->group(function(){
     Route::apiResource('category',CategoryController::class);
 });
 
