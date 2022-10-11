@@ -37,7 +37,7 @@ class CategoryController extends Controller
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.$fexe";
 
-            $request->file('photopath')->storeAs('public/category', $fpath);
+            $request->file('photopath')->storeAs('public/category/', $fpath);
 
             $data['photopath'] = 'category/' . $fpath;
         }
@@ -72,13 +72,14 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::find($id);
+        $data = $request->all();
 
         if ($request->has('photopath')) {
             $fname = time();
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.$fexe";
 
-            $request->file('photopath')->storeAs('public/category', $fpath);
+            $request->file('photopath')->storeAs('public/category/', $fpath);
 
             if($category->photopath)
             {
@@ -89,7 +90,7 @@ class CategoryController extends Controller
         }
 
 
-        $category->update($request->all());
+        $category->update($data);
 
         return response()->json([
             'message' => 'Category Updated Successfully',
@@ -106,6 +107,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+        if($category->photopath)
+            {
+                Storage::delete('public/'.$category->photopath);
+            }
         return response()->json([
             'message' => 'Category Deleted Successfully'
         ], 200);
