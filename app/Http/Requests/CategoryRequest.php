@@ -38,7 +38,7 @@ class CategoryRequest extends FormRequest
         return [
             'category_name' => 'required',
             'priority' => 'required',
-            'photopath' => 'required',
+            'photopath' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 

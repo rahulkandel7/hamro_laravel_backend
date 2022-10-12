@@ -3,8 +3,8 @@
 
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
+use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,8 +26,7 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LoginRegisterController::class, 'logout']);
-    Route::apiResource('category',CategoryController::class);
-  
+    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('subcategory', SubcategoryController::class);
+    Route::get('user', [OtherController::class, 'getUser']);
 });
-
-Route::apiResource('subcategory',SubcategoryController::class);

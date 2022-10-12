@@ -59,7 +59,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return response()->json([
+            'data' => $category,
+        ], 200);
     }
 
     /**
@@ -81,9 +83,8 @@ class CategoryController extends Controller
 
             $request->file('photopath')->storeAs('public/category/', $fpath);
 
-            if($category->photopath)
-            {
-                Storage::delete('public/'.$category->photopath);
+            if ($category->photopath) {
+                Storage::delete('public/' . $category->photopath);
             }
 
             $data['photopath'] = 'category/' . $fpath;
@@ -106,11 +107,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Storage::delete($category->photopath);
+        if ($category->photopath) {
+            Storage::delete('public/' . $category->photopath);
+        }
         $category->delete();
-        if($category->photopath)
-            {
-                Storage::delete('public/'.$category->photopath);
-            }
+
+
         return response()->json([
             'message' => 'Category Deleted Successfully'
         ], 200);

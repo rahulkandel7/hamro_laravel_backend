@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class RegisterRequest extends FormRequest
 {
@@ -30,9 +32,21 @@ class RegisterRequest extends FormRequest
             'address' => 'required',
             'phone_number' => 'required',
             'profile_photo' => 'required|image|mimes:png,jpg,jpeg',
-            'role' => 'required',
+            'role' => 'nullable',
             'gender' => 'required',
             'confirm_password' => 'required|same:password'
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        $response = response()->json([
+            'message' => 'Invalid data send',
+            'details' => $errors->messages(),
+        ], 422);
+
+        throw new HttpResponseException($response);
     }
 }
