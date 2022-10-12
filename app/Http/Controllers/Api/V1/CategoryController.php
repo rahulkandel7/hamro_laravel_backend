@@ -112,6 +112,9 @@ class CategoryController extends Controller
             Storage::delete('public/' . $category->photopath);
         }
         $category->delete();
+        if ($category->photopath) {
+            Storage::delete('public/' . $category->photopath);
+        }
 
 
         return response()->json([
