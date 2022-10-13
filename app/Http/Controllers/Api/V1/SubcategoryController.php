@@ -17,12 +17,12 @@ class SubcategoryController extends Controller
     public function index()
     {
         $data = SubCategory::all();
-        foreach($data as $d){
+        foreach ($data as $d) {
             $d->category_name = $d->category->category_name;
         }
         return response()->json([
             'data' => $data,
-        ],200);
+        ], 200);
     }
 
     /**
@@ -38,7 +38,8 @@ class SubcategoryController extends Controller
         return response()->json([
             'message' => 'Sub Category Added Successfully',
             'data' => $data,
-        ],200);
+            'success' => true,
+        ], 200);
     }
 
     /**
@@ -47,9 +48,12 @@ class SubcategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(SubCategory $subCategory)
+    public function show($id)
     {
-        //
+        $subCategory = SubCategory::find($id);
+        return response()->json([
+            'data' => $subCategory,
+        ], 200);
     }
 
     /**
@@ -67,7 +71,8 @@ class SubcategoryController extends Controller
         return response()->json([
             'message' => 'Sub Category Updated Successfully',
             'data' => $data,
-        ],200);
+            'success' => true,
+        ], 200);
     }
 
     /**
@@ -76,11 +81,12 @@ class SubcategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy($id)
     {
+        $subCategory = SubCategory::find($id);
         $subCategory->delete();
         return response()->json([
             'message' => 'Sub Category Deleted Successfully',
-        ],200);
+        ], 200);
     }
 }
