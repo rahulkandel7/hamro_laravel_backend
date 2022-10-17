@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OtherController;
@@ -28,5 +28,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LoginRegisterController::class, 'logout']);
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('subcategory', SubcategoryController::class);
+    Route::apiResource('brand', BrandController::class);
     Route::get('user', [OtherController::class, 'getUser']);
 });
