@@ -49,6 +49,7 @@ class CategoryRequest extends FormRequest
         $response = response()->json([
             'message' => 'Invalid data send',
             'details' => $errors->messages(),
+            'status' => false,
         ], 422);
 
         throw new HttpResponseException($response);

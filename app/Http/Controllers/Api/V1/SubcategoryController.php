@@ -22,6 +22,7 @@ class SubcategoryController extends Controller
         }
         return response()->json([
             'data' => $data,
+            'status' => true,
         ], 200);
     }
 
@@ -38,7 +39,7 @@ class SubcategoryController extends Controller
         return response()->json([
             'message' => 'Sub Category Added Successfully',
             'data' => $data,
-            'success' => true,
+            'status' => true,
         ], 200);
     }
 
@@ -53,6 +54,7 @@ class SubcategoryController extends Controller
         $subCategory = SubCategory::find($id);
         return response()->json([
             'data' => $subCategory,
+            'status' => true,
         ], 200);
     }
 
@@ -71,7 +73,7 @@ class SubcategoryController extends Controller
         return response()->json([
             'message' => 'Sub Category Updated Successfully',
             'data' => $data,
-            'success' => true,
+            'status' => true,
         ], 200);
     }
 
@@ -87,6 +89,7 @@ class SubcategoryController extends Controller
         $subCategory->delete();
         return response()->json([
             'message' => 'Sub Category Deleted Successfully',
+            'status' => true,
         ], 200);
     }
 }

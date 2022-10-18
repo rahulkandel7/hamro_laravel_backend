@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OtherController;
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('subcategory', SubcategoryController::class);
     Route::apiResource('brand', BrandController::class);
+    Route::apiResource('product', ProductController::class);
     Route::get('user', [OtherController::class, 'getUser']);
 });

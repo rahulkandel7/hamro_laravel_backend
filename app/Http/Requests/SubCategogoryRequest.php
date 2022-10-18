@@ -32,24 +32,17 @@ class SubCategogoryRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    protected function failedValidation(Validator $validator)
     {
-        return [
-            'subcategory_name.required' => 'Please Provide Sub Category Name',
-            'category_id.required' => 'Please Choose Category',
-            'priority.required' => 'Please Provide Priority',
-        ];
+        $errors = $validator->errors();
+
+        $response = response()->json([
+            'message' => 'Invalid data send',
+            'details' => $errors->messages(),
+            'status' => false,
+
+        ], 422);
+
+        throw new HttpResponseException($response);
     }
-
-    // protected function failedValidation(Validator $validator)
-    // {
-    //     $errors = $validator->errors();
-
-    //     $response = response()->json([
-    //         'message' => 'Invalid data send',
-    //         'details' => $errors->messages(),
-    //     ], 422);
-
-    //     throw new HttpResponseException($response);
-    // }
 }

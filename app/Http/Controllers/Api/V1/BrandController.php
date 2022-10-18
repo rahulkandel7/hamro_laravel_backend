@@ -19,6 +19,7 @@ class BrandController extends Controller
         $data = Brand::all();
         return response()->json([
             'data' => $data,
+            'status' => true,
         ], 200);
     }
 
@@ -34,6 +35,7 @@ class BrandController extends Controller
         return response()->json([
             'message' => 'Brand Added Successfully',
             'data' => $data,
+            'status' => true,
         ], 200);
     }
 
@@ -45,7 +47,10 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        return response()->json([
+            'data' => $brand,
+            'status' => true,
+        ], 200);
     }
 
     /**
@@ -62,6 +67,7 @@ class BrandController extends Controller
         return response()->json([
             'message' => 'Brand Updated Successfully',
             'data' => $data,
+            'status' => true,
         ], 200);
     }
 
@@ -76,6 +82,7 @@ class BrandController extends Controller
         $brand->delete();
         return response()->json([
             'message' => 'Brand Deleted Successfully',
+            'status' => true,
         ], 200);
     }
 }

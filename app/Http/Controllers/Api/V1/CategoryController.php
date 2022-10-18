@@ -20,6 +20,7 @@ class CategoryController extends Controller
         $categories = Category::all();
         return response()->json([
             'data' => $categories,
+            'status' => true,
         ], 200);
     }
 
@@ -48,6 +49,7 @@ class CategoryController extends Controller
         return response()->json([
             'message' => 'Category Added Successfully',
             'data' => $category,
+            'status' => true,
         ], 200);
     }
 
@@ -61,6 +63,7 @@ class CategoryController extends Controller
     {
         return response()->json([
             'data' => $category,
+            'status' => true,
         ], 200);
     }
 
@@ -96,6 +99,7 @@ class CategoryController extends Controller
         return response()->json([
             'message' => 'Category Updated Successfully',
             'data' => $category,
+            'status' => true,
         ], 200);
     }
 
@@ -114,7 +118,8 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json([
-            'message' => 'Category Deleted Successfully'
+            'message' => 'Category Deleted Successfully',
+            'status' => true,
         ], 200);
     }
 }

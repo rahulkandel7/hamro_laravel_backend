@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $data = Product::all();
         return response()->json([
-        'data' => $data,
+            'data' => $data,
         ], 200);
     }
 
@@ -31,37 +31,35 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-       $data = $request->all();
+        $data = $request->all();
 
-       if ($request->has('photopath1')) {
-        $fname = time();
-        $fexe = $request->file('photopath1')->extension();
-        $fpath = "$fname.'1'.$fexe";
+        if ($request->has('photopath1')) {
+            $fname = time();
+            $fexe = $request->file('photopath1')->extension();
+            $fpath = "$fname.'1'.$fexe";
 
-        $request->file('photopath1')->storeAs('public/products/', $fpath);
+            $request->file('photopath1')->storeAs('public/products/', $fpath);
 
-        $data['photopath1'] = 'products/' . $fpath;
+            $data['photopath1'] = 'products/' . $fpath;
         }
 
-        if ($request->has('photopath2')) 
-        {
+        if ($request->photopath2 != null) {
             $fname = time();
             $fexe = $request->file('photopath2')->extension();
             $fpath = "$fname.'2'.$fexe";
-    
+
             $request->file('photopath2')->storeAs('public/products/', $fpath);
-    
+
             $data['photopath2'] = 'products/' . $fpath;
         }
 
-        if ($request->has('photopath3')) 
-        {
+        if ($request->photopath3 != null) {
             $fname = time();
             $fexe = $request->file('photopath3')->extension();
             $fpath = "$fname.'3'.$fexe";
-    
+
             $request->file('photopath3')->storeAs('public/products/', $fpath);
-    
+
             $data['photopath3'] = 'products/' . $fpath;
         }
 
@@ -70,8 +68,8 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Product Added Successfully',
             'data' => $product,
-            ], 200);
-
+            'status' => true,
+        ], 200);
     }
 
     /**
@@ -97,48 +95,43 @@ class ProductController extends Controller
         $product = Product::find($id);
         $data = $request->all();
 
-       if ($request->has('photopath1')) {
-        $fname = time();
-        $fexe = $request->file('photopath1')->extension();
-        $fpath = "$fname.'1'.$fexe";
+        if ($request->has('photopath1')) {
+            $fname = time();
+            $fexe = $request->file('photopath1')->extension();
+            $fpath = "$fname.'1'.$fexe";
 
-        $request->file('photopath1')->storeAs('public/products/', $fpath);
+            $request->file('photopath1')->storeAs('public/products/', $fpath);
 
-        if($product->photopath1)
-            {
-                Storage::delete('public/'.$product->photopath1);
+            if ($product->photopath1) {
+                Storage::delete('public/' . $product->photopath1);
             }
 
-        $data['photopath1'] = 'products/' . $fpath;
+            $data['photopath1'] = 'products/' . $fpath;
         }
 
-        if ($request->has('photopath2')) 
-        {
+        if ($request->has('photopath2')) {
             $fname = time();
             $fexe = $request->file('photopath2')->extension();
             $fpath = "$fname.'2'.$fexe";
-    
+
             $request->file('photopath2')->storeAs('public/products/', $fpath);
-            if($product->photopath2)
-            {
-                Storage::delete('public/'.$product->photopath2);
+            if ($product->photopath2) {
+                Storage::delete('public/' . $product->photopath2);
             }
-    
+
             $data['photopath2'] = 'products/' . $fpath;
         }
 
-        if ($request->has('photopath3')) 
-        {
+        if ($request->has('photopath3')) {
             $fname = time();
             $fexe = $request->file('photopath3')->extension();
             $fpath = "$fname.'3'.$fexe";
-    
+
             $request->file('photopath3')->storeAs('public/products/', $fpath);
-            if($product->photopath3)
-            {
-                Storage::delete('public/'.$product->photopath3);
+            if ($product->photopath3) {
+                Storage::delete('public/' . $product->photopath3);
             }
-    
+
             $data['photopath3'] = 'products/' . $fpath;
         }
 
@@ -147,7 +140,7 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Product Updated Successfully',
             'data' => $product,
-            ], 200);
+        ], 200);
     }
 
     /**
@@ -159,22 +152,18 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        if($product->photopath1)
-        {
-            Storage::delete('public/'.$product->photopath1);
+        if ($product->photopath1) {
+            Storage::delete('public/' . $product->photopath1);
         }
-        if($product->photopath2)
-        {
-            Storage::delete('public/'.$product->photopath2);
+        if ($product->photopath2) {
+            Storage::delete('public/' . $product->photopath2);
         }
-        if($product->photopath3)
-        {
-            Storage::delete('public/'.$product->photopath3);
+        if ($product->photopath3) {
+            Storage::delete('public/' . $product->photopath3);
         }
-        
+
         return response()->json([
             'message' => 'Product Deleted Successfully',
-            ], 200);
-
+        ], 200);
     }
 }

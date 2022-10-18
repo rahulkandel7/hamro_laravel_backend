@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ProductRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class ProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,13 +27,34 @@ class ProductRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
+            'sub_category_id' => 'nullable',
             'sku' => 'required|unique:products',
             'brand_id' => 'required',
             'price' => 'required',
             'stock' => 'numeric|min:1',
             'name' => 'required',
+            'color' => 'required',
+            'size' => 'required',
+            'discountPrice' => 'nullable',
+            'status' => 'required',
+            'flashsale' => 'nullable',
             'description' => 'required',
-            'photopath1' => 'required',
+            'photopath1' => 'required|image|mimes:png,jpg,jpeg',
+            'photopath2' => 'nullable|image|mimes:png,jpg,jpeg',
+            'photopath3' => 'nullable|image|mimes:png,jpg,jpeg',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        $response = response()->json([
+            'message' => 'Invalid data send',
+            'details' => $errors->messages(),
+            'status' => false,
+        ], 422);
+
+        throw new HttpResponseException($response);
     }
 }
