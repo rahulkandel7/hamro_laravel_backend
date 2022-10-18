@@ -35,7 +35,7 @@ class ProductRequest extends FormRequest
             'name' => 'required',
             'color' => 'required',
             'size' => 'required',
-            'discountPrice' => 'nullable',
+            'discountedPrice' => 'nullable',
             'status' => 'required',
             'flashsale' => 'nullable',
             'description' => 'required',
