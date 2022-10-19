@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class SubCategogoryRequest extends FormRequest
 {
@@ -15,7 +16,11 @@ class SubCategogoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Auth::user()->role == "admin") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

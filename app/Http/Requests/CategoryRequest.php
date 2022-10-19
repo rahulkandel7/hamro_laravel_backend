@@ -16,16 +16,11 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        // if(Auth::user()->role != 'Admin')
-        // {
-        //     return true;
-        // }
-        // else
-        // {
-        //     return false;
-        // }
-
-        return true;
+        if (Auth::user()->role == "admin") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

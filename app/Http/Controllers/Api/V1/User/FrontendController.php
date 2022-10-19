@@ -28,12 +28,27 @@ class FrontendController extends Controller
 
     public function fetchByCategory($id)
     {
+        $category = Category::find($id);
         $products = Product::where('category_id', $id)->get();
         foreach ($products as $product) {
             $product->category_name = $product->category->category_name;
         }
         return response()->json([
-            'data' => $products
+            'data' => $products,
+            'category' => $category,
+        ], 200);
+    }
+
+    public function fetchBySubCategory($id)
+    {
+        $sub = SubCategory::find($id);
+        $products = Product::where('sub_category_id', $id)->get();
+        foreach ($products as $product) {
+            $product->sub_category_name = $product->subCategory->subcategory_name;
+        }
+        return response()->json([
+            'data' => $products,
+            'sub' => $sub,
         ], 200);
     }
 
@@ -44,6 +59,17 @@ class FrontendController extends Controller
         $product->brand_name = $product->brand->brand_name;
         return response()->json([
             'data' => $product
+        ], 200);
+    }
+
+    public function loadAllProduct()
+    {
+        $products = Product::all();
+        foreach ($products as $product) {
+            $product->category_name = $product->category->category_name;
+        }
+        return response()->json([
+            'data' => $products
         ], 200);
     }
 }

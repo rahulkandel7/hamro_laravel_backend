@@ -27,6 +27,8 @@ Route::prefix('v1')->group(function () {
     Route::get('fetchCategory', [FrontendController::class, 'fetchCategory']);
     Route::get('fetchSubCategory', [FrontendController::class, 'fetchSubCategory']);
     Route::get('category/product/{id}', [FrontendController::class, 'fetchByCategory']);
+    Route::get('subcategory/product/{id}', [FrontendController::class, 'fetchBySubCategory']);
+    Route::get('products', [FrontendController::class, 'loadAllProduct']);
     Route::get('product/view/{id}', [FrontendController::class, 'fetchProduct']);
 });
 
