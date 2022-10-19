@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
+use App\Http\Controllers\API\v1\User\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('login', [LoginRegisterController::class, 'login']);
     Route::post('register', [LoginRegisterController::class, 'register']);
+    Route::get('fetchCategory', [FrontendController::class, 'fetchCategory']);
+    Route::get('fetchSubCategory', [FrontendController::class, 'fetchSubCategory']);
+    Route::get('category/product/{id}', [FrontendController::class, 'fetchByCategory']);
+    Route::get('product/view/{id}', [FrontendController::class, 'fetchProduct']);
 });
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
