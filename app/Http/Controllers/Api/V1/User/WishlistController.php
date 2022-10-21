@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WishlistRequest;
+use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,11 @@ class WishlistController extends Controller
     public function index()
     {
         $data = Wishlist::where('user_id', auth()->user()->id)->get();
+        foreach ($data as $d) {
+            $product = Product::where('id', $d->product_id)->first();
+            $d->products = $product;
+        }
+
         return response()->json([
             'data' => $data,
             'status' => true,
