@@ -33,11 +33,19 @@ class WishlistController extends Controller
     {
         $data = $request->all();
         $data['user_id'] = auth()->user()->id;
-        Wishlist::create($data);
-        return response()->json([
-            'message' => 'Product Added to Wishlist Successfully',
-            'status' => true,
-        ], 200);
+        $already = Wishlist::where('user_id', auth()->user()->id)->where('product_id', $request->product_id)->first();
+        if ($already) {
+            return response()->json([
+                'message' => 'Already added to wishlist',
+                'status' => true,
+            ], 422);
+        } else {
+            Wishlist::create($data);
+            return response()->json([
+                'message' => 'Product Added to Wishlist Successfully',
+                'status' => true,
+            ], 200);
+        }
     }
 
     /**
