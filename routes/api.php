@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
 use App\Http\Controllers\API\v1\User\FrontendController;
+use App\Http\Controllers\API\V1\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +41,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('brand', BrandController::class);
     Route::apiResource('product', ProductController::class);
     Route::get('user', [OtherController::class, 'getUser']);
+    Route::apiResource('wishlist', WishlistController::class);
 });
