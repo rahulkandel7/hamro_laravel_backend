@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
@@ -27,7 +27,9 @@ Route::prefix('v1')->group(function () {
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LoginRegisterController::class, 'logout']);
     Route::apiResource('category',CategoryController::class);
+    Route::apiResource('subcategory',SubcategoryController::class);
+    Route::apiResource('cart',CartController::class);
   
 });
 
-Route::apiResource('subcategory',SubcategoryController::class);
+
