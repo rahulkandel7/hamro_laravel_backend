@@ -29,4 +29,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Wishlist::class);
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
