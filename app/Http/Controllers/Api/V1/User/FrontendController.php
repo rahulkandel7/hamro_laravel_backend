@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
@@ -13,6 +14,9 @@ class FrontendController extends Controller
     public function fetchCategory()
     {
         $categories = Category::all();
+        foreach ($categories as $category) {
+            $category->sub = $category->subCategory->count();
+        }
         return response()->json([
             'categories' => $categories
         ], 200);
@@ -70,6 +74,14 @@ class FrontendController extends Controller
         }
         return response()->json([
             'data' => $products
+        ], 200);
+    }
+
+    public function fetchBrand()
+    {
+        $brands = Brand::all();
+        return response()->json([
+            'data' => $brands
         ], 200);
     }
 }

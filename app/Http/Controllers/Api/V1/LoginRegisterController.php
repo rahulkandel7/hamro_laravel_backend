@@ -66,7 +66,7 @@ class LoginRegisterController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::user()->tokens()->delete();
+        Auth::user()->currentAccessToken()->delete();
         return response()->json([
             'success' => true,
             'message' => 'Logout Success'
