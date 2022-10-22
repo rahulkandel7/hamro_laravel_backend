@@ -51,5 +51,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('shipping', ShippingController::class);
     Route::apiResource('rating', RatingController::class);
     Route::apiResource('comment', CommentController::class);
+    Route::post('user/update',[OtherController::class,'updateUser']);
+    Route::post('user/changepass',[OtherController::class,'changePassword']);
 
 });
