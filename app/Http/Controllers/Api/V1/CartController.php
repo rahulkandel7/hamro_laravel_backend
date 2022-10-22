@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    
+
     public function index()
     {
-        $cart = Cart::all();
+        $carts = Cart::all();
+        foreach ($carts as $cart) {
+            $cart->product;
+        }
+
         return response()->json([
-            'data' => $cart,
+            'data' => $carts,
         ], 200);
     }
 
@@ -26,9 +30,13 @@ class CartController extends Controller
      */
     public function store(CartRequest $request)
     {
-        $data = Cart::create($request->all());
+        $datas = $request->all();
+        $datas['user_id'] = auth()->user()->id;
+        $data = Cart::create($datas);
+
         return response()->json([
             'message' => 'Added to Cart',
+            'status' => true,
             'data' => $data,
         ], 200);
     }
@@ -71,7 +79,20 @@ class CartController extends Controller
     {
         $cart->delete();
         return response()->json([
-            'message' => 'Cart Deleted Successfully',
+            'message' => 'Item Removed From Cart Successfully',
+            'status' => true,
+        ], 200);
+    }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $cart = Cart::find($id);
+        $cart->quantity = $request->quantity;
+        $cart->save();
+        return response()->json([
+            'message' => 'Cart Updated Successfully',
+            'data' => $cart,
+            'status' => true,
         ], 200);
     }
 }

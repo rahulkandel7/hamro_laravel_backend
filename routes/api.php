@@ -44,4 +44,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('wishlist', WishlistController::class);
     Route::apiResource('cart', CartController::class);
     Route::get('user', [OtherController::class, 'getUser']);
+    Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
 });

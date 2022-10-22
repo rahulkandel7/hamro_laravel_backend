@@ -29,9 +29,8 @@ class CartRequest extends FormRequest
             'color' => 'nullable',
             'size' => 'nullable',
             'price' => 'nullable',
-            'user_id' => 'required',
             'ordered' => 'required',
-            'status' => 'required',
+            'status' => 'nullable',
         ];
     }
 }
