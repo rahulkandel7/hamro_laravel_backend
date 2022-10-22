@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
+use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\RatingController;
@@ -53,5 +54,13 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('comment', CommentController::class);
     Route::post('user/update',[OtherController::class,'updateUser']);
     Route::post('user/changepass',[OtherController::class,'changePassword']);
+    Route::post('order/store',[OrderController::class, 'store']);
+    Route::get('order/{status}',[OrderController::class, 'index']);
+    Route::get('ordercart/{orderid}',[OrderController::class, 'order_cart']);
+    Route::get('order/update/{orderid}/{status}',[OrderController::class, 'update_order']);
+    Route::post('order/update',[OrderController::class, 'update_cancelled_order']);
+    Route::get('order/cart/update/{cartid}/{status}',[OrderController::class, 'update_cart']);
+    Route::get('order/delete',[OrderController::class,'delete']);
+
 
 });
