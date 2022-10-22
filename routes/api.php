@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\ShippingController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
 use App\Http\Controllers\API\v1\User\FrontendController;
 use App\Http\Controllers\API\V1\User\WishlistController;
@@ -45,4 +46,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('cart', CartController::class);
     Route::get('user', [OtherController::class, 'getUser']);
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
+    Route::apiResource('shipping', ShippingController::class);
+
 });
