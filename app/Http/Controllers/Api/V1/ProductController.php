@@ -80,6 +80,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $product->brand_name = $product->brand->brand_name;
+        $product->category_name = $product->category->category_name;
+        // $product->sub_category_name = $product->subCategory->sub_category_name;
         return response()->json([
             'data' => $product,
         ], 200);
@@ -100,7 +103,7 @@ class ProductController extends Controller
         if ($request->has('photopath1')) {
             $fname = time();
             $fexe = $request->file('photopath1')->extension();
-            $fpath = "$fname.'1'.$fexe";
+            $fpath = "$fname.$fexe";
 
             $request->file('photopath1')->storeAs('public/products/', $fpath);
 
@@ -114,7 +117,7 @@ class ProductController extends Controller
         if ($request->has('photopath2')) {
             $fname = time();
             $fexe = $request->file('photopath2')->extension();
-            $fpath = "$fname.'2'.$fexe";
+            $fpath = "$fname.$fexe";
 
             $request->file('photopath2')->storeAs('public/products/', $fpath);
             if ($product->photopath2) {
@@ -127,7 +130,7 @@ class ProductController extends Controller
         if ($request->has('photopath3')) {
             $fname = time();
             $fexe = $request->file('photopath3')->extension();
-            $fpath = "$fname.'3'.$fexe";
+            $fpath = "$fname.$fexe";
 
             $request->file('photopath3')->storeAs('public/products/', $fpath);
             if ($product->photopath3) {
