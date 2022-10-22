@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
@@ -49,5 +50,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
     Route::apiResource('shipping', ShippingController::class);
     Route::apiResource('rating', RatingController::class);
+    Route::apiResource('comment', CommentController::class);
 
 });
