@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1\User;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\SubCategory;
@@ -62,6 +63,10 @@ class FrontendController extends Controller
     {
         $product = Product::find($id);
         $ratings = Rating::where('product_id', $id)->get();
+        $comments = Comment::where('product_id', $id)->get();
+        foreach ($comments as $comment) {
+            $comment->user_name = $comment->user->name;
+        }
 
         $product->category_name = $product->category->category_name;
         $product->brand_name = $product->brand->brand_name;
@@ -69,6 +74,7 @@ class FrontendController extends Controller
         return response()->json([
             'data' => $product,
             'ratings' => $ratings,
+            'comments' => $comments,
         ], 200);
     }
 
