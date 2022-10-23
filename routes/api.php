@@ -49,5 +49,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
     Route::apiResource('shipping', ShippingController::class);
     Route::apiResource('rating', RatingController::class);
-
+    Route::get('rating/product/{id}', [RatingController::class, 'findRating']);
 });

@@ -67,6 +67,7 @@ class ShippingController extends Controller
         return response()->json([
             'message' => 'Shipping Updated Successfully',
             'status' => true,
+
             'data' => $data,
         ], 200);
     }

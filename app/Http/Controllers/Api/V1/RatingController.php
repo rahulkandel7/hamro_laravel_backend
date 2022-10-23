@@ -33,7 +33,14 @@ class RatingController extends Controller
     {
         $datas = $request->all();
         $datas['user_id'] = auth()->user()->id;
-        $data = Rating::create($datas);
+
+        $rating = Rating::where('user_id', $datas['user_id'])->where('product_id', $datas['product_id'])->first();
+        if ($rating) {
+            $data = $rating->update($datas);
+        } else {
+            $data = $rating = Rating::create($datas);
+        }
+
 
         return response()->json([
             'message' => 'The Product Has Been Rated',
@@ -82,6 +89,15 @@ class RatingController extends Controller
         return response()->json([
             'message' => 'Rating Removed Successfully',
             'status' => true,
+        ], 200);
+    }
+
+    public function findRating($id)
+    {
+        $rating = Rating::where('product_id', $id)->where('user_id', auth()->user()->id)->get();
+
+        return response()->json([
+            'data' => $rating,
         ], 200);
     }
 }

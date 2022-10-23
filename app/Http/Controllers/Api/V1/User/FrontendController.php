@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -59,10 +61,14 @@ class FrontendController extends Controller
     public function fetchProduct($id)
     {
         $product = Product::find($id);
+        $ratings = Rating::where('product_id', $id)->get();
+
         $product->category_name = $product->category->category_name;
         $product->brand_name = $product->brand->brand_name;
+
         return response()->json([
-            'data' => $product
+            'data' => $product,
+            'ratings' => $ratings,
         ], 200);
     }
 
