@@ -48,7 +48,9 @@ class ShippingController extends Controller
      */
     public function show(Shipping $shipping)
     {
-        //
+        return response()->json([
+            'data' => $shipping,
+        ], 200);
     }
 
     /**
@@ -64,6 +66,7 @@ class ShippingController extends Controller
         $data = $shipping->update($request->all());
         return response()->json([
             'message' => 'Shipping Updated Successfully',
+            'status' => true,
             'data' => $data,
         ], 200);
     }
