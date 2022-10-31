@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'password' => 'required',
             'address' => 'required',
             'phone_number' => 'required',
-            'profile_photo' => 'required|image|mimes:png,jpg,jpeg',
+            'profile_photo' => 'nullable|image|mimes:png,jpg,jpeg',
             'role' => 'nullable',
             'gender' => 'required',
             'confirm_password' => 'required|same:password'

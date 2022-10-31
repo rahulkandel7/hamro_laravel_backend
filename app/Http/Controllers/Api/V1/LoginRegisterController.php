@@ -30,8 +30,8 @@ class LoginRegisterController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Login Failed'
-            ], 200);
+                'message' => 'Invalid Credentials'
+            ], 422);
         }
     }
 
@@ -41,14 +41,16 @@ class LoginRegisterController extends Controller
         $data = $request->all();
 
         $data['password'] = bcrypt($data['password']);
-        if ($request->has('profile_photo')) {
-            $fname = Str::random(20);
-            $fexe = $request->file('profile_photo')->extension();
-            $fpath = "$fname.$fexe";
+        if ($request->profile_photo) {
+            if ($request->has('profile_photo')) {
+                $fname = Str::random(20);
+                $fexe = $request->file('profile_photo')->extension();
+                $fpath = "$fname.$fexe";
 
-            $request->file('profile_photo')->storeAs('public/profiles', $fpath);
+                $request->file('profile_photo')->storeAs('public/profiles', $fpath);
 
-            $data['profile_photo'] = 'profiles/' . $fpath;
+                $data['profile_photo'] = 'profiles/' . $fpath;
+            }
         }
 
 

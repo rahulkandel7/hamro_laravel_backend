@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('phone_number');
-            $table->string('profile_photo');
+            $table->string('profile_photo')->nullable();
             $table->string('gender');
             $table->string('role')->default('user');
             $table->boolean('isActive')->default(true);
