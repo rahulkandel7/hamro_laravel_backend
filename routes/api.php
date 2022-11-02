@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\BannerController;
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CategoryController;
@@ -47,6 +48,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('product', ProductController::class);
     Route::apiResource('wishlist', WishlistController::class);
     Route::apiResource('cart', CartController::class);
+    Route::apiResource('banner', BannerController::class);
     Route::get('user', [OtherController::class, 'getUser']);
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
     Route::apiResource('shipping', ShippingController::class);
