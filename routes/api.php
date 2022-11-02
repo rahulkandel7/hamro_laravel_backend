@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\Api\V1\CouponController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\OtherController;
@@ -49,6 +50,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('wishlist', WishlistController::class);
     Route::apiResource('cart', CartController::class);
     Route::apiResource('banner', BannerController::class);
+    Route::apiResource('coupon', CouponController::class);
     Route::get('user', [OtherController::class, 'getUser']);
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
     Route::apiResource('shipping', ShippingController::class);
