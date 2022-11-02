@@ -37,8 +37,12 @@ class FrontendController extends Controller
     {
         $category = Category::find($id);
         $products = Product::where('category_id', $id)->get();
+        $ratings = Rating::all();
+
         foreach ($products as $product) {
             $product->category_name = $product->category->category_name;
+            $product->rating_number = $ratings->where('product_id', $product->id)->count();
+            $product->rating = $ratings->where('product_id', $product->id)->average('rating');
         }
         return response()->json([
             'data' => $products,
@@ -50,8 +54,13 @@ class FrontendController extends Controller
     {
         $sub = SubCategory::find($id);
         $products = Product::where('sub_category_id', $id)->get();
+        $ratings = Rating::all();
+
         foreach ($products as $product) {
             $product->sub_category_name = $product->subCategory->subcategory_name;
+
+            $product->rating_number = $ratings->where('product_id', $product->id)->count();
+            $product->rating = $ratings->where('product_id', $product->id)->average('rating');
         }
         return response()->json([
             'data' => $products,
@@ -63,6 +72,9 @@ class FrontendController extends Controller
     {
         $product = Product::find($id);
         $ratings = Rating::where('product_id', $id)->get();
+        $product->rating = Rating::where('product_id', $product->id)->average('rating');
+
+
         $comments = Comment::where('product_id', $id)->get();
         foreach ($comments as $comment) {
             $comment->user_name = $comment->user->name;
@@ -81,8 +93,11 @@ class FrontendController extends Controller
     public function loadAllProduct()
     {
         $products = Product::all();
+        $ratings = Rating::all();
         foreach ($products as $product) {
             $product->category_name = $product->category->category_name;
+            $product->rating_number = $ratings->where('product_id', $product->id)->count();
+            $product->rating = $ratings->where('product_id', $product->id)->average('rating');
         }
         return response()->json([
             'data' => $products
