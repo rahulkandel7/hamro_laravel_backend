@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::post('login', [LoginRegisterController::class, 'login']);
     Route::post('register', [LoginRegisterController::class, 'register']);
+    Route::get('fetchbanner', [FrontendController::class, 'fetchBanner']);
     Route::get('fetchCategory', [FrontendController::class, 'fetchCategory']);
     Route::get('fetchSubCategory', [FrontendController::class, 'fetchSubCategory']);
     Route::get('fetchBrand', [FrontendController::class, 'fetchBrand']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Comment;
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
+
+    public function fetchBanner()
+    {
+        $banner = Banner::all();
+
+        return response()->json([
+            'data' => $banner,
+        ], 200);
+    }
     public function fetchCategory()
     {
         $categories = Category::all();
