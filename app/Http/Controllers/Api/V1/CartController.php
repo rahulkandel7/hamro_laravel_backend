@@ -12,7 +12,7 @@ class CartController extends Controller
 
     public function index()
     {
-        $carts = Cart::all();
+        $carts = Cart::where('ordered', 0)->where('user_id', auth()->user()->id)->get();
         foreach ($carts as $cart) {
             $cart->product;
         }
@@ -88,6 +88,19 @@ class CartController extends Controller
     {
         $cart = Cart::find($id);
         $cart->quantity = $request->quantity;
+        $cart->save();
+        return response()->json([
+            'message' => 'Cart Updated Successfully',
+            'data' => $cart,
+            'status' => true,
+        ], 200);
+    }
+
+    public function updateOrdered(Request $request, $id)
+    {
+        $cart = Cart::find($id);
+
+        $cart->ordered = $request->ordered;
         $cart->save();
         return response()->json([
             'message' => 'Cart Updated Successfully',

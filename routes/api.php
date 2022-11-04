@@ -54,9 +54,11 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('coupon', CouponController::class);
     Route::get('user', [OtherController::class, 'getUser']);
     Route::post('cart/update/{id}', [CartController::class, 'updateQuantity']);
+    Route::post('cart/update/ordered/{id}', [CartController::class, 'updateOrdered']);
     Route::apiResource('shipping', ShippingController::class);
     Route::apiResource('rating', RatingController::class);
     Route::get('rating/product/{id}', [RatingController::class, 'findRating']);
+    Route::get('/coupons', [FrontendController::class, 'fetchCoupon']);
     Route::apiResource('comment', CommentController::class);
     Route::get('comment/product/{id}', [CommentController::class, 'findComment']);
     Route::post('user/update', [OtherController::class, 'updateUser']);
@@ -66,6 +68,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::get('ordercart/{orderid}', [OrderController::class, 'order_cart']);
     Route::get('order/update/{orderid}/{status}', [OrderController::class, 'update_order']);
     Route::post('order/update', [OrderController::class, 'update_cancelled_order']);
-    Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
+    // Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
     Route::get('order/delete', [OrderController::class, 'delete']);
 });

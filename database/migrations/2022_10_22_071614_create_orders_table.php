@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('shipping_id')->constrained();
+            $table->string('coupon_id')->nullable();
             $table->string('cart_id');
+            $table->integer('coupon_amount')->default(0);
             $table->integer('delivery_charge');
             $table->string('shipping_address');
             $table->string('fullname');

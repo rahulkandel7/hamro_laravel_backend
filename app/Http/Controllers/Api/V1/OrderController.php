@@ -208,16 +208,16 @@ class OrderController extends Controller
     }
 
 
-    public function update_cart($cartid, $status)
-    {
-        $cart = Cart::find($cartid);
-        $cart->status = $status;
-        $cart->save();
-        return response()->json([
-            'message' => 'Cart Status Updated',
-            'status' => true,
-        ], 200);
-    }
+    // public function update_cart($cartid, $status)
+    // {
+    //     $cart = Cart::find($cartid);
+    //     $cart->status = $status;
+    //     $cart->save();
+    //     return response()->json([
+    //         'message' => 'Cart Status Updated',
+    //         'status' => true,
+    //     ], 200);
+    // }
 
 
     public function delete($orderid)

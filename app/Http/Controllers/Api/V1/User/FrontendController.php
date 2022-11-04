@@ -7,6 +7,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\Rating;
 use App\Models\SubCategory;
@@ -119,6 +120,14 @@ class FrontendController extends Controller
         $brands = Brand::all();
         return response()->json([
             'data' => $brands
+        ], 200);
+    }
+
+    public function fetchCoupon()
+    {
+        $coupons = Coupon::all();
+        return response()->json([
+            'data' => $coupons
         ], 200);
     }
 }

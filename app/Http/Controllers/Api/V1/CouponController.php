@@ -32,6 +32,7 @@ class CouponController extends Controller
     public function store(CouponRequest $request)
     {
         $data = Coupon::create($request->all());
+
         return response()->json([
             'message' => 'Coupon Added Successfully',
             'data' => $data,
