@@ -70,4 +70,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('order/update', [OrderController::class, 'update_cancelled_order']);
     // Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
     Route::get('order/delete', [OrderController::class, 'delete']);
+    Route::get('dashboard', [OtherController::class, 'dashboard']);
 });

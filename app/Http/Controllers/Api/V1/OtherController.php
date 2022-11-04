@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,5 +81,16 @@ class OtherController extends Controller
                 'data' => $data,
             ], 200);
         }
+    }
+
+    public function dashboard()
+    {
+        $orders = Order::all();
+
+        return response()->json([
+            'message' => 'Dashboard Data',
+            'status' => true,
+            'data' => $orders,
+        ], 200);
     }
 }
