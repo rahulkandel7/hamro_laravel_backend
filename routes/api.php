@@ -13,7 +13,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\RatingController;
 use App\Http\Controllers\Api\V1\ShippingController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
-use App\Http\Controllers\API\v1\User\FrontendController;
+use App\Http\Controllers\API\V1\User\FrontendController;
 use App\Http\Controllers\API\V1\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
