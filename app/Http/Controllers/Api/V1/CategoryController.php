@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -38,7 +37,7 @@ class CategoryController extends Controller
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.$fexe";
 
-            $request->file('photopath')->storeAs('public/category/', $fpath);
+            $request->file('photopath')->move(public_path() . '/public/category/', $fpath);
 
             $data['photopath'] = 'category/' . $fpath;
         }
@@ -84,10 +83,10 @@ class CategoryController extends Controller
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.$fexe";
 
-            $request->file('photopath')->storeAs('public/category/', $fpath);
+            $request->file('photopath')->move(public_path() . '/public/category/', $fpath);
 
             if ($category->photopath) {
-                Storage::delete('public/' . $category->photopath);
+                File::delete('public/' . $category->photopath);
             }
 
             $data['photopath'] = 'category/' . $fpath;
@@ -111,9 +110,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        Storage::delete($category->photopath);
+        File::delete($category->photopath);
         if ($category->photopath) {
-            Storage::delete('public/' . $category->photopath);
+            File::delete('public/' . $category->photopath);
         }
         $category->delete();
 

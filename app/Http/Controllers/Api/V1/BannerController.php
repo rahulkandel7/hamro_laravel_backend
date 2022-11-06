@@ -5,8 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BannerRequest;
 use App\Models\Banner;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
@@ -39,7 +38,7 @@ class BannerController extends Controller
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.'1'.$fexe";
 
-            $request->file('photopath')->storeAs('public/banners/', $fpath);
+            $request->file('photopath')->move(public_path() . '/public/banners/', $fpath);
 
             $data['photopath'] = 'banners/' . $fpath;
         }
@@ -82,10 +81,10 @@ class BannerController extends Controller
             $fexe = $request->file('photopath')->extension();
             $fpath = "$fname.'1'.$fexe";
 
-            $request->file('photopath')->storeAs('public/banners/', $fpath);
+            $request->file('photopath')->move(public_path() . '/public/banners/', $fpath);
 
             if ($banner->photopath) {
-                Storage::delete('public/' . $banner->photopath);
+                File::delete('public/' . $banner->photopath);
             }
 
             $data['photopath'] = 'banners/' . $fpath;
@@ -109,7 +108,7 @@ class BannerController extends Controller
     public function destroy(Banner $banner)
     {
         if ($banner->photopath) {
-            Storage::delete('public/' . $banner->photopath);
+            File::delete('public/' . $banner->photopath);
         }
         $banner->delete();
 

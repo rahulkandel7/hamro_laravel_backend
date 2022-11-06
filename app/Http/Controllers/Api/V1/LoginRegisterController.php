@@ -47,7 +47,7 @@ class LoginRegisterController extends Controller
                 $fexe = $request->file('profile_photo')->extension();
                 $fpath = "$fname.$fexe";
 
-                $request->file('profile_photo')->storeAs('public/profiles', $fpath);
+                $request->file('profile_photo')->move(public_path() . '/public/profiles', $fpath);
 
                 $data['profile_photo'] = 'profiles/' . $fpath;
             }
