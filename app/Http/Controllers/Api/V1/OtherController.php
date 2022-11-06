@@ -7,8 +7,8 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -41,9 +41,9 @@ class OtherController extends Controller
             $fexe = $request->file('profile_photo')->extension();
             $fpath = "$fname.$fexe";
 
-            $request->file('profile_photo')->storeAs('public/profiles', $fpath);
+            $request->file('profile_photo')->move(public_path() . '/public/profiles', $fpath);
             if ($user->profile_photo) {
-                Storage::delete('public/' . $user->profile_photo);
+                File::delete('public/' . $user->profile_photo);
             }
 
             $data['profile_photo'] = 'profiles/' . $fpath;
