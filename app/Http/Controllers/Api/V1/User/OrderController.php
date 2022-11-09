@@ -18,16 +18,12 @@ class OrderController extends Controller
             $dat = array();
             foreach($cartid as $cart){
                 $data = (object)[];
-                $cartdata = Cart::where('id',$cart)->firstOrFail();
-                $prd = Product::where('id',$cartdata->productid)->firstOrFail();
-                $data->productid = $prd->id;
-                $data->productname = $prd->name;
-                $data->photopath = $prd->photopath1;
-                $data->color = $prd->color;
-                $data->size = $prd->size;
-                $data->quantity = $prd->quantity;
-                $data->status = $cartdata->status;
-                $data->reason = $d->cancel_reason;
+                $cartdata = Cart::find($cart);
+                $data->cart = $cartdata;
+                $data->cart->productname = $cartdata->product->name;
+                $data->cart->photopath = $cartdata->product->photopath1;
+                $data->cart->productid = $cartdata->product->id;
+                
                 $dat[] = $data;
             }
             $dd[] = $dat;
