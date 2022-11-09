@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\RatingController;
 use App\Http\Controllers\Api\V1\ShippingController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
 use App\Http\Controllers\Api\v1\User\FrontendController;
+use App\Http\Controllers\Api\V1\User\OrderController as UserOrderController;
 use App\Http\Controllers\Api\V1\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,4 +72,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     // Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
     Route::get('order/delete', [OrderController::class, 'delete']);
     Route::get('dashboard', [OtherController::class, 'dashboard']);
+
+    //UserOrder
+    Route::get('/user/order',[UserOrderController::class, 'show_order']);
 });
