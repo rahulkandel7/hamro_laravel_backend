@@ -31,7 +31,7 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
         $datas = $request->all();
-        $cartdata = Cart::where('user_id',auth()->user()->id)->where('product_id',$datas['product_id'])->count();
+        $cartdata = Cart::where('user_id',auth()->user()->id)->where('product_id',$datas['product_id'])->where('ordered','0')->count();
         if($cartdata>0){
             return response()->json([
                 'message' => 'Already Added to Cart',
