@@ -31,6 +31,7 @@ return new class extends Migration
             $table->integer('stock')->default(0);
             $table->integer('discountedprice')->nullable();
             $table->boolean('flashsale')->default(false);
+            $table->boolean('available')->default(true);
             $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
