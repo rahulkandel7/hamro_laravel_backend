@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AdController;
 use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\BrandController;
 use App\Http\Controllers\Api\V1\CartController;
@@ -79,4 +80,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     //Top Picks
     Route::get('/toppicks',[TopPicksController::class,'top_picks']);
+
+    //Ad Api
+    Route::apiResource('ad',[AdController::class]);
 });
