@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\RatingController;
 use App\Http\Controllers\Api\V1\ShippingController;
 use App\Http\Controllers\Api\V1\SubcategoryController;
+use App\Http\Controllers\Api\V1\TopPicksController;
 use App\Http\Controllers\Api\V1\User\FrontendController;
 use App\Http\Controllers\Api\V1\User\OrderController as UserOrderController;
 use App\Http\Controllers\Api\V1\User\WishlistController;
@@ -75,4 +76,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     //UserOrder
     Route::get('/user/order',[UserOrderController::class, 'show_order']);
+
+    //Top Picks
+    Route::get('/toppicks',[TopPicksController::class,'top_picks']);
 });
