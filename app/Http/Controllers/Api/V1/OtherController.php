@@ -53,7 +53,7 @@ class OtherController extends Controller
         return response()->json([
             'message' => 'User Updated Successfully',
             'status' => true,
-            'data' => $data,
+            'data' => $user,
         ], 200);
     }
 
