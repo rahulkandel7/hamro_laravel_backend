@@ -43,6 +43,11 @@ Route::prefix('v1')->group(function () {
     Route::get('subcategory/product/{id}', [FrontendController::class, 'fetchBySubCategory']);
     Route::get('products', [FrontendController::class, 'loadAllProduct']);
     Route::get('product/view/{id}', [FrontendController::class, 'fetchProduct']);
+    //Top Picks
+    Route::get('/toppicks',[TopPicksController::class,'top_picks']);
+
+    //Get Ads
+    Route::get('/ads/list',[AdController::class,'index']);
 });
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
@@ -84,3 +89,4 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //Ad Api
     Route::apiResource('ad',[AdController::class]);
 });
+
