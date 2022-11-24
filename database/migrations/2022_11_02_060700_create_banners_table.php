@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->string('photopath');
-            $table->boolean('forMobile');
             $table->boolean('available');
             $table->string('priority');
             $table->timestamps();
