@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('gender');
             $table->string('role')->default('user');
             $table->boolean('isActive')->default(true);
+            $table->string('device_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
