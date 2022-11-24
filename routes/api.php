@@ -83,9 +83,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //UserOrder
     Route::get('/user/order',[UserOrderController::class, 'show_order']);
 
-    //Top Picks
-    Route::get('/toppicks',[TopPicksController::class,'top_picks']);
-
     //Ad Api
     Route::apiResource('ad',[AdController::class]);
 });
