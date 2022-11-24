@@ -44,7 +44,7 @@ Route::prefix('v1')->group(function () {
     Route::get('products', [FrontendController::class, 'loadAllProduct']);
     Route::get('product/view/{id}', [FrontendController::class, 'fetchProduct']);
     //Top Picks
-    Route::get('/toppicks',[TopPicksController::class,'top_picks']);
+    Route::get('/toppicks',[TopPicksController::class,'toppicks']);
 
     //Get Ads
     Route::get('/ads/list',[AdController::class,'index']);
