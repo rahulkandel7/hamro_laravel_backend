@@ -26,7 +26,7 @@ class AdRequest extends FormRequest
         return [
             'ad_code' => 'required',
             'ad_description' => 'required',
-            'photopath' => 'required',
+            'photopath' => 'nullable',
         ];
     }
 }

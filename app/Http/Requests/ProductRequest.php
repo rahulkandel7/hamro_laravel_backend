@@ -44,7 +44,7 @@ class ProductRequest extends FormRequest
             'status' => 'required',
             'flashsale' => 'nullable',
             'description' => 'required',
-            'photopath1' => 'required|image|mimes:png,jpg,jpeg',
+            'photopath1' => 'nullable|image|mimes:png,jpg,jpeg',
             'photopath2' => 'nullable|image|mimes:png,jpg,jpeg',
             'photopath3' => 'nullable|image|mimes:png,jpg,jpeg',
         ];

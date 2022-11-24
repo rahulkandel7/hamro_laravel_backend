@@ -29,7 +29,7 @@ class BannerRequest extends FormRequest
     public function rules()
     {
         return [
-            'photopath' => 'required|image|mimes:png,jpg,jpeg',
+            'photopath' => 'nullable|image|mimes:png,jpg,jpeg',
             'priority' => 'required',
         ];
     }
