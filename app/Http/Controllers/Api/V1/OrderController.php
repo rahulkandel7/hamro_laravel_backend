@@ -34,6 +34,7 @@ class OrderController extends Controller
             $shipping = Shipping::find($data->shipping_id);
             $data->shipping_area = $shipping->area_name;
             $cartid = explode(',', $data->cart_id);
+            $data->couponname = $data->coupon->name;
             $dat = array();
             $data->total_amount = 0;
             foreach ($cartid as $cart) {
