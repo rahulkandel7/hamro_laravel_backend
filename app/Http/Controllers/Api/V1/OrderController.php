@@ -33,6 +33,7 @@ class OrderController extends Controller
         foreach ($datas as $data) {
             $shipping = Shipping::find($data->shipping_id);
             $data->shipping_area = $shipping->area_name;
+            $data->shipping_amount = $shipping->price;
             $cartid = explode(',', $data->cart_id);
             $data->couponname = $data->coupon->name;
             $dat = array();
@@ -53,17 +54,19 @@ class OrderController extends Controller
 
     public function order_cart($orderid)
     {
-        $order = Order::where('id', $orderid)->first();
+        $order = Order::findOrFail($orderid);
 
         $cartid = explode(',', $order->cart_id);
         $carts = array();
         foreach ($cartid as $cart) {
             $data = (object)[];
-            $cartdata = Cart::where('id', $cart)->firstOrFail();
-            $prd = Product::where('id', $cartdata->productid)->firstOrFail();
+            $cartdata = Cart::find($cart);
+            $prd = Product::find($cartdata->product_id);
             $data->id = $cartdata->id;
             $data->productid = $prd->id;
             $data->productname = $prd->name;
+            $data->size = $cartdata->size;
+            $data->color = $cartdata->color;
 
             $data->rate = $cartdata->price;
 
@@ -209,16 +212,16 @@ class OrderController extends Controller
     }
 
 
-    // public function update_cart($cartid, $status)
-    // {
-    //     $cart = Cart::find($cartid);
-    //     $cart->status = $status;
-    //     $cart->save();
-    //     return response()->json([
-    //         'message' => 'Cart Status Updated',
-    //         'status' => true,
-    //     ], 200);
-    // }
+    public function update_cart($cartid, $status)
+    {
+        $cart = Cart::find($cartid);
+        $cart->status = $status;
+        $cart->save();
+        return response()->json([
+            'message' => 'Cart Status Updated',
+            'status' => true,
+        ], 200);
+    }
 
 
     public function delete($orderid)

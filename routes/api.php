@@ -76,14 +76,14 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::get('ordercart/{orderid}', [OrderController::class, 'order_cart']);
     Route::get('order/update/{orderid}/{status}', [OrderController::class, 'update_order']);
     Route::post('order/update', [OrderController::class, 'update_cancelled_order']);
-    // Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
-    Route::get('order/delete', [OrderController::class, 'delete']);
+    Route::get('order/cart/update/{cartid}/{status}', [OrderController::class, 'update_cart']);
+    Route::get('order/delete/{id}', [OrderController::class, 'delete']);
     Route::get('dashboard', [OtherController::class, 'dashboard']);
 
     //UserOrder
     Route::get('/user/order',[UserOrderController::class, 'show_order']);
 
     //Ad Api
-    Route::apiResource('ad',[AdController::class]);
+    Route::apiResource('ad',AdController::class);
 });
 

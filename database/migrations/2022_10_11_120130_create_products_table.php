@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('photopath1');
             $table->string('photopath2')->nullable();
             $table->string('photopath3')->nullable();
-            $table->boolean('status')->default(true);
             $table->integer('stock')->default(0);
             $table->integer('discountedprice')->nullable();
             $table->boolean('flashsale')->default(false);
