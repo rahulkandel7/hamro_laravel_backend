@@ -56,6 +56,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('subcategory', SubcategoryController::class);
     Route::apiResource('brand', BrandController::class);
     Route::apiResource('product', ProductController::class);
+    Route::get('/product/delete/{id}',[ProductController::class,'delete']);
     Route::apiResource('wishlist', WishlistController::class);
     Route::apiResource('cart', CartController::class);
     Route::apiResource('banner', BannerController::class);

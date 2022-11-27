@@ -167,6 +167,16 @@ class ProductController extends Controller
         }
 
         return response()->json([
+            'message' => 'Product Permanently Deleted Successfully',
+        ], 200);
+    }
+
+    public function delete($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->deleted = true;
+        $product->save();
+        return response()->json([
             'message' => 'Product Deleted Successfully',
         ], 200);
     }
