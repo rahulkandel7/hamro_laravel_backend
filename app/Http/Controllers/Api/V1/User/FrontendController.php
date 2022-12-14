@@ -130,4 +130,9 @@ class FrontendController extends Controller
             'data' => $coupons
         ], 200);
     }
+
+    public function forgot_password($email)
+    {
+        
+    }
 }

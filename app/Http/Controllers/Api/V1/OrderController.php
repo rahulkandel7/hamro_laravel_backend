@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shipping;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -112,45 +113,43 @@ class OrderController extends Controller
         $order->status = $status;
         $order->save();
 
-        //     $description = "Your Order is changed to ".$status;
-        //     $title = "Order Notification";
-        //     $deviceToken = Users::where('id',$order->user_id)->first();
+            $description = "Your Order Status is now ".$status;
+            $title = "Order Notification";
+            $deviceToken = User::where('id',$order->user_id)->first();
 
-        //     if($deviceToken)
-        //     {
-        //         //change notification for mobile
-        //     $key = "AAAAQptqg0g:APA91bFsk5ZNjIm9AsP5jGCQ4nICab6OqTQPiQAu2l43Vyyhr-GEEaq-NuZwyEsnT58mCKxvjzG8O_WWe6Wc3NKDgQ0v1wp8NzCuoqHCSiHUeNgW-Pdqyf51A6yBfAHBGdpodCrCpJDE";
+            if($deviceToken)
+            {
+                //change notification for mobile
+            $key = "AAAAv9nDc7I:APA91bGiiXJaNi88v25L5_EOjn3juz1YL1FpTbqmRO-mUlsvXT2BXtwz7nkOo0dFJCqJAkmHFngmj3L4jAtCmXpd-yP_90Sb3g2zdYOfFV9KJW-R9XDHilHq2IEKhUYIZFokk6Ijvg07";
 
-        //     $mydata = [
-        //        'to' => $deviceToken->deviceToken,
-        //        'notification' => [
-        //            'body' => $description,
-        //            'title' => $title,
-        //        ],
+            $mydata = [
+               'to' => $deviceToken->device_token,
+               'notification' => [
+                   'body' => $description,
+                   'title' => $title,
+               ],
 
-        //     ];
+            ];
 
-        //     $jsondata = json_encode($mydata);
+            $jsondata = json_encode($mydata);
 
-        //     $header = [
-        //        'Authorization: key='.$key,
-        //        'Content-Type: application/json',
-        //     ];
+            $header = [
+               'Authorization: key='.$key,
+               'Content-Type: application/json',
+            ];
 
-        //     $ch = curl_init();
+            $ch = curl_init();
 
-        //    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        //    curl_setopt($ch, CURLOPT_POST, true);
-        //    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        //    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        //    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
+           curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+           curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
 
-        //    curl_exec($ch);
-        //     }
+           curl_exec($ch);
+            }
 
-
-        // return back()->with('swalsuccess','Order is now '.$status);
         return response()->json([
             'message' => 'Order is now ' . $status,
             'status' => true,
@@ -172,43 +171,42 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->cancel_reason = $request->reason;
         $order->save();
-        //     $description = "Your Order is changed to ".$request->status;
-        //     $title = "Order Notification";
-        //     $deviceToken = Users::where('id',$order->user_id)->first();
+            $description = "Your Order is changed to ".$request->status;
+            $title = "Order Notification";
+            $deviceToken = User::where('id',$order->user_id)->first();
 
-        //     if($deviceToken)
-        //     {
-        //         //change notification for mobile
-        //     $key = "AAAAQptqg0g:APA91bFsk5ZNjIm9AsP5jGCQ4nICab6OqTQPiQAu2l43Vyyhr-GEEaq-NuZwyEsnT58mCKxvjzG8O_WWe6Wc3NKDgQ0v1wp8NzCuoqHCSiHUeNgW-Pdqyf51A6yBfAHBGdpodCrCpJDE";
+            if($deviceToken)
+            {
+                //change notification for mobile
+                $key = "AAAAv9nDc7I:APA91bGiiXJaNi88v25L5_EOjn3juz1YL1FpTbqmRO-mUlsvXT2BXtwz7nkOo0dFJCqJAkmHFngmj3L4jAtCmXpd-yP_90Sb3g2zdYOfFV9KJW-R9XDHilHq2IEKhUYIZFokk6Ijvg07";
 
-        //     $mydata = [
-        //        'to' => $deviceToken->deviceToken,
-        //        'notification' => [
-        //            'body' => $description,
-        //            'title' => $title,
-        //        ],
+            $mydata = [
+               'to' => $deviceToken->device_token,
+               'notification' => [
+                   'body' => $description,
+                   'title' => $title,
+               ],
 
-        //     ];
+            ];
 
-        //     $jsondata = json_encode($mydata);
+            $jsondata = json_encode($mydata);
 
-        //     $header = [
-        //        'Authorization: key='.$key,
-        //        'Content-Type: application/json',
-        //     ];
+            $header = [
+               'Authorization: key='.$key,
+               'Content-Type: application/json',
+            ];
 
-        //     $ch = curl_init();
+            $ch = curl_init();
 
-        //    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        //    curl_setopt($ch, CURLOPT_POST, true);
-        //    curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        //    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        //    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
+           curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+           curl_setopt($ch, CURLOPT_POST, true);
+           curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+           curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+           curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
 
-        //    curl_exec($ch);
-        //     }
-        // return back()->with('swalsuccess','Order is now Cancelled');
+           curl_exec($ch);
+            }
         return response()->json([
             'message' => 'Order is now Cancelled',
             'status' => true,
