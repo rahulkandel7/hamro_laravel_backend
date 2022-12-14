@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderRequest;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Shipping;
@@ -35,8 +36,11 @@ class OrderController extends Controller
             $data->shipping_area = $shipping->area_name;
             $data->shipping_amount = $shipping->price;
             $cartid = explode(',', $data->cart_id);
-            $data->couponname = $data->coupon->name;
-            $dat = array();
+            $cp = Coupon::find($data->coupon_id);
+            if($cp){
+                $data->couponname = $cp->name;
+            }
+            // $dat = array();
             $data->total_amount = 0;
             foreach ($cartid as $cart) {
                 $cartdata = Cart::where('id', $cart)->firstOrFail();

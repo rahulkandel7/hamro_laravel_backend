@@ -30,24 +30,47 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'category_id' => 'required',
-            'sub_category_id' => 'nullable',
-            'sku' => 'required|unique:products',
-            'brand_id' => 'required',
-            'price' => 'required',
-            'stock' => 'numeric|min:1',
-            'name' => 'required',
-            'color' => 'required',
-            'size' => 'required',
-            'discountedPrice' => 'nullable',
-            'flashsale' => 'nullable',
-            'description' => 'required',
-            'available' => 'nullable',
-            'photopath1' => 'nullable|image|mimes:png,jpg,jpeg',
-            'photopath2' => 'nullable|image|mimes:png,jpg,jpeg',
-            'photopath3' => 'nullable|image|mimes:png,jpg,jpeg',
-        ];
+        if($this->isMethod('PUT'))
+        {
+            return [
+                'category_id' => 'required',
+                'sub_category_id' => 'nullable',
+                'brand_id' => 'required',
+                'price' => 'required',
+                'stock' => 'numeric|min:1',
+                'name' => 'required',
+                'color' => 'required',
+                'size' => 'required',
+                'discountedPrice' => 'nullable',
+                'flashsale' => 'nullable',
+                'description' => 'required',
+                'available' => 'nullable',
+                'photopath1' => 'nullable|image|mimes:png,jpg,jpeg',
+                'photopath2' => 'nullable|image|mimes:png,jpg,jpeg',
+                'photopath3' => 'nullable|image|mimes:png,jpg,jpeg',
+            ];
+        }
+
+        else{
+            return [
+                'category_id' => 'required',
+                'sub_category_id' => 'nullable',
+                'sku' => 'required|unique:products',
+                'brand_id' => 'required',
+                'price' => 'required',
+                'stock' => 'numeric|min:1',
+                'name' => 'required',
+                'color' => 'required',
+                'size' => 'required',
+                'discountedPrice' => 'nullable',
+                'flashsale' => 'nullable',
+                'description' => 'required',
+                'available' => 'nullable',
+                'photopath1' => 'nullable|image|mimes:png,jpg,jpeg',
+                'photopath2' => 'nullable|image|mimes:png,jpg,jpeg',
+                'photopath3' => 'nullable|image|mimes:png,jpg,jpeg',
+            ];
+        }
     }
 
     protected function failedValidation(Validator $validator)
