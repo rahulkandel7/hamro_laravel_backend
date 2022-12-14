@@ -34,7 +34,8 @@ class RegisterRequest extends FormRequest
             'profile_photo' => 'nullable|image|mimes:png,jpg,jpeg',
             'role' => 'nullable',
             'gender' => 'required',
-            'confirm_password' => 'required|same:password'
+            'confirm_password' => 'required|same:password',
+            'device_token' => 'nullable',
         ];
     }
 
