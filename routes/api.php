@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\CouponController;
 use App\Http\Controllers\Api\V1\LoginRegisterController;
+use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\OtherController;
 use App\Http\Controllers\Api\V1\ProductController;
@@ -87,4 +88,5 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     //Ad Api
     Route::apiResource('ad', AdController::class);
     Route::apiResource('notification', NotificationController::class);
+    Route::get('notification/resend/{id}',[NotificationController::class,'resend']);
 });
