@@ -19,6 +19,11 @@ class LoginRegisterController extends Controller
             $id = Auth::user()->id;
             $user = User::findOrFail($id);
 
+            if ($request->has('device_token')) {
+                $user->device_token = $request->device_token;
+                $user->save();
+            }
+
             $token =  $user->createToken('hamro-electronics')->plainTextToken;
 
             return response()->json([
