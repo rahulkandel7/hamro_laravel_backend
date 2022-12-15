@@ -32,36 +32,36 @@ class NotificationController extends Controller
     public function store(NotificationRequest $request)
     {
         $notification = Notification::create($request->all());
-            //change notification for mobile
+        //change notification for mobile
         $key = "AAAAv9nDc7I:APA91bGiiXJaNi88v25L5_EOjn3juz1YL1FpTbqmRO-mUlsvXT2BXtwz7nkOo0dFJCqJAkmHFngmj3L4jAtCmXpd-yP_90Sb3g2zdYOfFV9KJW-R9XDHilHq2IEKhUYIZFokk6Ijvg07";
 
         $mydata = [
-           'topic' => 'all',
-           'notification' => [
-               'body' => $notification->description,
-               'title' => $notification->title,
-           ],
+            'to' => '/topics/all',
+            'notification' => [
+                'body' => $notification->description,
+                'title' => $notification->title,
+            ],
 
         ];
 
         $jsondata = json_encode($mydata);
 
         $header = [
-           'Authorization: key='.$key,
-           'Content-Type: application/json',
+            'Authorization: key=' . $key,
+            'Content-Type: application/json',
         ];
 
         $ch = curl_init();
-     
-       curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-       curl_setopt($ch, CURLOPT_POST, true);
-       curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
 
-       curl_exec($ch);
-        
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
+
+        curl_exec($ch);
+
         return response()->json([
             'data' => $notification,
             'message' => 'success',
@@ -71,36 +71,36 @@ class NotificationController extends Controller
     public function resend($id)
     {
         $notification = Notification::find($id);
-            //change notification for mobile
+        //change notification for mobile
         $key = "AAAAv9nDc7I:APA91bGiiXJaNi88v25L5_EOjn3juz1YL1FpTbqmRO-mUlsvXT2BXtwz7nkOo0dFJCqJAkmHFngmj3L4jAtCmXpd-yP_90Sb3g2zdYOfFV9KJW-R9XDHilHq2IEKhUYIZFokk6Ijvg07";
 
         $mydata = [
-           'topic' => 'all',
-           'notification' => [
-               'body' => $notification->description,
-               'title' => $notification->title,
-           ],
+            'to' => '/topics/all',
+            'notification' => [
+                'body' => $notification->description,
+                'title' => $notification->title,
+            ],
 
         ];
 
         $jsondata = json_encode($mydata);
 
         $header = [
-           'Authorization: key='.$key,
-           'Content-Type: application/json',
+            'Authorization: key=' . $key,
+            'Content-Type: application/json',
         ];
 
         $ch = curl_init();
-     
-       curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-       curl_setopt($ch, CURLOPT_POST, true);
-       curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
 
-       curl_exec($ch);
-        
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsondata);
+
+        curl_exec($ch);
+
         return response()->json([
             'data' => $notification,
             'message' => 'success',
